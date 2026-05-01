@@ -1,1 +1,192 @@
-https://colab.research.google.com/drive/1Y-YiJ0SD8gfCHEeb4z3uQWQpTSNYqhqF
+from google.colab import files
+uploaded = files.upload()
+
+from sklearn.neural_network import MLPRegressor
+
+# Create model
+nn_model = MLPRegressor(hidden_layer_sizes=(64, 32), max_iter=500, random_state=42)
+
+# Train model
+nn_model.fit(X_train, y_train)
+
+# Predict
+y_pred_nn = nn_model.predict(X_test)
+
+# Evaluate
+mse_nn = mean_squared_error(y_test, y_pred_nn)
+r2_nn = r2_score(y_test, y_pred_nn)
+
+print("Neural Network MSE:", mse_nn)
+print("Neural Network R2 Score:", r2_nn)
+
+import matplotlib.pyplot as plt
+
+plt.scatter(y_test, y_pred_nn)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted (Neural Network)")
+plt.show()
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+df = pd.read_csv("spotify_songs.csv")
+
+X = df[['danceability', 'energy', 'tempo', 'loudness', 'duration_ms']]
+y = df['track_popularity']
+
+X = X.fillna(X.mean())
+y = y.fillna(y.mean())
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean Squared Error (MSE):", mse)
+print("R2 Score:", r2)
+
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+import matplotlib.pyplot as plt
+
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted (Linear Regression)")
+plt.show()
+
+import matplotlib.pyplot as plt
+
+# Model names
+models = ['Linear Regression']
+
+# Your values
+mse_values = [585.91]
+r2_values = [0.056]
+
+# Plot MSE
+plt.figure()
+plt.bar(models, mse_values)
+plt.title("MSE Comparison")
+plt.xlabel("Models")
+plt.ylabel("MSE")
+plt.show()
+
+# Plot R2 Score
+plt.figure()
+plt.bar(models, r2_values)
+plt.title("R2 Score Comparison")
+plt.xlabel("Models")
+plt.ylabel("R2 Score")
+plt.show()
+
+from sklearn.tree import DecisionTreeRegressor
+
+# Create model
+dt_model = DecisionTreeRegressor(random_state=42)
+
+# Train model
+dt_model.fit(X_train, y_train)
+
+# Predict
+y_pred_dt = dt_model.predict(X_test)
+
+# Evaluate
+mse_dt = mean_squared_error(y_test, y_pred_dt)
+r2_dt = r2_score(y_test, y_pred_dt)
+
+print("Decision Tree MSE:", mse_dt)
+print("Decision Tree R2 Score:", r2_dt)
+
+
+import matplotlib.pyplot as plt
+
+plt.scatter(y_test, y_pred_dt)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted (Decision Tree)")
+plt.show()
+
+from sklearn.ensemble import RandomForestRegressor
+
+# Create model
+rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+
+# Train model
+rf_model.fit(X_train, y_train)
+
+# Predict
+y_pred_rf = rf_model.predict(X_test)
+
+# Evaluate
+mse_rf = mean_squared_error(y_test, y_pred_rf)
+r2_rf = r2_score(y_test, y_pred_rf)
+
+print("Random Forest MSE:", mse_rf)
+print("Random Forest R2 Score:", r2_rf)
+
+import matplotlib.pyplot as plt
+
+plt.scatter(y_test, y_pred_rf)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted (Random Forest)")
+plt.show()
+
+from sklearn.neural_network import MLPRegressor
+
+# Create model
+nn_model = MLPRegressor(hidden_layer_sizes=(64, 32), max_iter=500, random_state=42)
+
+# Train model
+nn_model.fit(X_train, y_train)
+
+# Predict
+y_pred_nn = nn_model.predict(X_test)
+
+# Evaluate
+mse_nn = mean_squared_error(y_test, y_pred_nn)
+r2_nn = r2_score(y_test, y_pred_nn)
+
+print("Neural Network MSE:", mse_nn)
+print("Neural Network R2 Score:", r2_nn)
+
+import matplotlib.pyplot as plt
+
+plt.scatter(y_test, y_pred_nn)
+plt.xlabel("Actual Popularity")
+plt.ylabel("Predicted Popularity")
+plt.title("Actual vs Predicted (Neural Network)")
+plt.show()
+
+
+from sklearn.neural_network import MLPRegressor
+
+nn_model = MLPRegressor(hidden_layer_sizes=(64, 32),
+                        max_iter=1000,
+                        learning_rate_init=0.001,
+                        random_state=42)
+
+nn_model.fit(X_train_scaled, y_train)
+
+y_pred_nn = nn_model.predict(X_test_scaled)
+
+from sklearn.metrics import mean_squared_error, r2_score
+
+print("MSE:", mean_squared_error(y_test, y_pred_nn))
+print("R2:", r2_score(y_test, y_pred_nn))
+
+
+residuals = y_test - y_pred
+
